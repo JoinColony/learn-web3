@@ -26,29 +26,29 @@ Here are the main features that we want to implement:
 
 And you know what? *You* can help building it, too! It’ll be out in the open on GitHub from day one! We’ll create issues that can be worked on between sessions and coordinate in Discord. If you want to be an active part of the development, join the [#buidl-with-colony channel in our Discord](https://discord.gg/5wKkCHDY)! There will be some bounties in CLNY out there for sure!
 
-## (Preliminary) Agenda
+## (Preliminary) Schedule
 
 Each session will be recorded and published to the Colony YouTube channel, so you don’t have to worry about missing one. I’ll be updating this agenda as the course progresses as I’m certain that we won’t be able to stick to it 100%. See this as a rough skeleton. The actual content is decided on on the go and first and foremost by *you*.
 
 Lesson 1 (February 14, 20:00 CET): We look at a smart contract together
 
-Lesson 2 (February 16, 20:00 CET): What’s web3? Accessing smart contracts from the browser (snorkel into ethers.js)
+Lesson 2 (February 21, 20:00 CET): Snorkel into ethers.js
 
-Lesson 3 (February 21, 20:00 CET): What’s a wallet? Connecting to MetaMask and building our first small dApp
+Lesson 3 (February 23, 20:00 CET): What’s a wallet? Connecting to MetaMask and building our first small dApp
 
 🦄 🍴🥄**ETH Denver break** 🥄🍴 🦄 (are you at ETHDenver? [Let’s hang](https://cal.com/chris-colony/ethdenver)!)
 
-Lesson 4 (March 7, tbd): What is Colony? Taking a look at the dApp and Colony SDK
+Lesson 4 (March 9, tbd): What is Colony? Taking a look at the dApp and Colony SDK
 
-Lesson 5 (March 9, tbd): Creating the basics. Next.js infrastructure and foundation of the project 
+Lesson 5 (March 14, tbd): Creating the basics. Next.js infrastructure and foundation of the project 
 
-Lesson 6 (March 14, tbd): Server work. Login & permissions
+Lesson 6 (March 16, tbd): Server work. Login & permissions
 
-Lesson 7 (March 16, tbd): Adding a database (Next.js and Prisma) and CRUD operations
+Lesson 7 (March 21, tbd): Adding a database (Next.js and Prisma) and CRUD operations
 
-Lesson 8 (March 21, tbd): Using Colony SDK for DAO governance and payments
+Lesson 8 (March 23, tbd): Using Colony SDK for DAO governance and payments
 
-Lesson 9 (March 23, tbd): Last touches and clean-up
+Lesson 9 (March 28, tbd): Last touches and clean-up
 
 ## Join the fun!
 
