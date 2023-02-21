@@ -4,6 +4,10 @@ Learn Web3 with Colony! Resources and application source code
 
 “Learn web3 with Colony" is a free, twitch-based online course designed for anyone interested in learning the fundamentals of web3 frontend development and DAO application programming. We’ll do regular low-key streaming sessions where we learn and build together! This course is targeted to web2 developers who’d like to get their feet wet in the web3 world.
 
+## Past episodes
+
+Watch past episodes on [YouTube](https://www.youtube.com/playlist?list=PLGruKlExlEBf9b7lnzrGggTW_2OYazjdm).
+
 ## Requirements
 
 You’ll need a basic understanding of JavaScript and React fundamentals to be able to follow along.
