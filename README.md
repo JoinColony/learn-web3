@@ -56,4 +56,4 @@ Lesson 9 (March 28, tbd): Last touches and clean-up
 
 ## Join the fun!
 
-So, are you ready to join us on this epic adventure? We don’t want or need your email or any other data. Just follow [Colony on Twitch](https://twitch.tv/JoinColony) if you like and get notified once we’re up and streaming! If you have any questions or comments, feel free comment here, shoot an email to [chris@colony.io](https://www.notion.so/Learn-web3-with-Colony-61c3049de88941c4a28e096fbddd4a82), or reach out on [Discord](https://discord.gg/5wKkCHDY) (chmanie#5800).
+So, are you ready to join us on this epic adventure? We don’t want or need your email or any other data. Just follow [Colony on Twitch](https://twitch.tv/JoinColony) if you like and get notified once we’re up and streaming! If you have any questions or comments, feel free comment here, shoot an email to [chris@colony.io](https://www.notion.so/Learn-web3-with-Colony-61c3049de88941c4a28e096fbddd4a82), or reach out on [Discord](https://discord.gg/5wKkCHDY) (chmanie#0001).
