@@ -42,7 +42,7 @@ Lesson 3 (February 23, 20:00 CET): What’s a wallet? Connecting to MetaMask and
 
 🦄 🍴🥄**ETH Denver break** 🥄🍴 🦄 (are you at ETHDenver? [Let’s hang](https://cal.com/chris-colony/ethdenver)!)
 
-Lesson 4 (March 9, tbd): What is Colony? Taking a look at the dApp and Colony SDK
+Lesson 4 (March 9, 5pm PST, 02:00 CET): What is Colony? Taking a look at the dApp and Colony SDK
 
 Lesson 5 (March 14, tbd): Creating the basics. Next.js infrastructure and foundation of the project 
 
