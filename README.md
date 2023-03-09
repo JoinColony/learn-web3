@@ -42,17 +42,17 @@ Lesson 3 (February 23, 20:00 CET): What’s a wallet? Connecting to MetaMask and
 
 🦄 🍴🥄**ETH Denver break** 🥄🍴 🦄 (are you at ETHDenver? [Let’s hang](https://cal.com/chris-colony/ethdenver)!)
 
-Lesson 4 (March 9, 5pm PST, 02:00 CET): What is Colony? Taking a look at the dApp and Colony SDK
+Lesson 4 (March 14, 5pm PST, 02:00 CET): What is Colony? Taking a look at the dApp and Colony SDK
 
-Lesson 5 (March 14, tbd): Creating the basics. Next.js infrastructure and foundation of the project 
+Lesson 5 (March 16, tbd): Creating the basics. Next.js infrastructure and foundation of the project 
 
-Lesson 6 (March 16, tbd): Server work. Login & permissions
+Lesson 6 (March 21, tbd): Server work. Login & permissions
 
-Lesson 7 (March 21, tbd): Adding a database (Next.js and Prisma) and CRUD operations
+Lesson 7 (March 23, tbd): Adding a database (Next.js and Prisma) and CRUD operations
 
-Lesson 8 (March 23, tbd): Using Colony SDK for DAO governance and payments
+Lesson 8 (March 28, tbd): Using Colony SDK for DAO governance and payments
 
-Lesson 9 (March 28, tbd): Last touches and clean-up
+Lesson 9 (April 4, tbd): Last touches and clean-up
 
 ## Join the fun!
 
