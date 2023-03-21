@@ -1,9 +1,18 @@
 import Head from 'next/head'
+import { withIronSessionSsr } from 'iron-session/next'
+
+import { ironOptions } from './config'
 
 import styles from '@/styles/Home.module.css'
 
-export default function Home() {
+interface Props {
+  user: {
+    address: string,
+    isAdmin: boolean,
+  },
+}
 
+export default function Home({ user }: Props) {
   return (
     <>
       <Head>
@@ -13,7 +22,24 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+        {user.address ?
+          <p>User with address {user.address} is logged in.
+          {user.isAdmin ? <span>They are an admin</span> : <span>They are no admin</span>}</p>
+        :
+          <p>Not logged in</p>
+        }
       </main>
     </>
   )
 }
+
+export const getServerSideProps = withIronSessionSsr(async ({ req }) => {
+  return {
+    props: {
+      user: {
+        address: req.session.siwe?.address,
+        isAdmin: req.session.user?.isAdmin,
+      }
+    }
+  }
+}, ironOptions)

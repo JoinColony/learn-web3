@@ -2,11 +2,7 @@ import { SiweMessage } from 'siwe'
 import { useAccount, useConnect, useDisconnect, useNetwork, useSignMessage } from 'wagmi'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 
-interface Props {
-  nonce: string
-}
-
-function Login({ nonce }: Props) {
+function Login() {
   const { address, isConnected } = useAccount()
   const { connect } = useConnect({
     connector: new InjectedConnector(),

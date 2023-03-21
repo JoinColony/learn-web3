@@ -7,7 +7,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req
   switch (method) {
     case 'GET':
-      res.send({ address: req.session.siwe?.address })
+      res.send({
+        address: req.session.siwe?.address,
+        isAdmin: req.session.user?.isAdmin,
+      })
       break
     default:
       res.setHeader('Allow', ['GET'])
