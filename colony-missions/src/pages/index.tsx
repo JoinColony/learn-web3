@@ -37,8 +37,8 @@ export const getServerSideProps = withIronSessionSsr(async ({ req }) => {
   return {
     props: {
       user: {
-        address: req.session.siwe?.address,
-        isAdmin: req.session.user?.isAdmin,
+        address: req.session.siwe?.address || null,
+        isAdmin: req.session.user?.isAdmin || null,
       }
     }
   }
