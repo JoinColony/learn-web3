@@ -3,8 +3,8 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { SiweMessage } from 'siwe'
 import { Id } from '@colony/sdk'
 
-import { ironOptions } from '../config'
-import { getClient } from '../../colony'
+import { ironOptions } from '@/config'
+import { getClient } from '@/colony'
 import { BigNumber } from 'ethers'
 
 const COLONY_DEV_ADDRESS = '0x364B3153A24bb9ECa28B8c7aCeB15E3942eb4fc5'
