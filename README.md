@@ -46,13 +46,15 @@ Lesson 4 (March 14, 5pm PST, 02:00 CET): What is Colony? Taking a look at the dA
 
 Lesson 5 (March 16, 17:00 CET): Creating the basics. Next.js infrastructure and foundation of the project 
 
-Lesson 6 (March 21, 17:00 CET): Server work. Login & permissions
+Lesson 6 (March 21, 17:00 CET): Sign in with Ethereum
 
-Lesson 7 (March 23, 17:00 CET): Adding a database (Next.js and Prisma) and CRUD operations
+Lesson 7 (March 23, 17:00 CET): Adding pages and routes
 
-Lesson 8 (March 28, 17:00 CEST): Using Colony SDK for DAO governance and payments
+Lesson 8 (March 28, 21:00 CEST): Creating forms and prettifying everything
 
-Lesson 9 (March 30, 17:00 CEST): Last touches and clean-up
+Lesson 9 (April 4, 21:00 CEST): Adding a database using Prisma
+
+Lesson 10 (April 18, 21:00 CEST): Continuation on database models and CRUD operations
 
 ## Join the fun!
 
