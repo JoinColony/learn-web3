@@ -1,18 +1,14 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-// import { withIronSessionSsr } from 'iron-session/next'
-//
-// import { ironOptions } from './config'
+
+import { prisma, Mission } from '@/prisma'
 
 interface Props {
-  // user: {
-  //   address: string,
-  //   isAdmin: boolean,
-  // },
+  missions: Mission[],
 }
 
-export default function ColonyMissions({ }: Props) {
+export default function ColonyMissions({ missions }: Props) {
   const router = useRouter()
   const { address } = router.query
   return (
@@ -23,10 +19,24 @@ export default function ColonyMissions({ }: Props) {
       <main className="container">
         <h1>Missions for Colony {address}</h1>
         <ul>
-          <li><Link href={`/missions/${address}/logo`}>Create a nice Logo for our Colony</Link></li>
+          {missions.map(mission => (
+            <li key={mission.id}>
+              <Link href={`/missions/${address}/${mission.id}`}>{mission.title}</Link>
+            </li>
+          ))}
           <li style={{ textDecoration: 'line-through' }}><Link href={`/missions/${address}/54`}>Solve issue #54 in our SDK</Link></li>
         </ul>
       </main>
     </>
   )
+}
+
+export const getServerSideProps = async ({ params }) => {
+  const missions = await prisma.mission.findMany({
+    where: {
+      colony: params.address
+    }
+  });
+
+  return { props: { missions }}
 }

@@ -2,11 +2,13 @@ import { withIronSessionApiRoute } from 'iron-session/next'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { SiweMessage } from 'siwe'
 import { Id } from '@colony/sdk'
+import { BigNumber } from 'ethers'
 
 import { ironOptions } from '@/config'
 import { getClient } from '@/colony'
-import { BigNumber } from 'ethers'
+import { prisma } from '@/prisma'
 
+// FIXME: Definitely do not hard code this, otherwise it'll only work with one Colony
 const COLONY_DEV_ADDRESS = '0x364B3153A24bb9ECa28B8c7aCeB15E3942eb4fc5'
 
 const isUserAdmmin = async (colonyAddress: string, userAddress: string) => {
@@ -38,6 +40,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
         req.session.siwe = fields
         await req.session.save()
+
+        const user = await prisma.user.findUnique({
+          where: {
+            address: fields.address,
+          }
+        })
+
+        if (!user) {
+          await prisma.user.create({
+            data: {
+              address: fields.address,
+            }
+          })
+        }
+
         res.json({ ok: true })
       } catch (_error) {
         res.json({ ok: false })

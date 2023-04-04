@@ -24,8 +24,24 @@ export default function CreateMission({ }: Props) {
   const router = useRouter()
   const { address } = router.query
   const { register, handleSubmit, reset } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = data => {
-    console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async data => {
+    if (!address || Array.isArray(address)) {
+      alert('I do not have a Colony address');
+      throw new Error('Colony address missing');
+    }
+
+    try {
+      await fetch('/api/mission', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ address, mission: data }),
+      })
+    } catch (_err) {
+      console.error(_err);
+      alert('There was an error!');
+    }
     reset();
   }
 
