@@ -4,8 +4,6 @@ import { useRouter } from 'next/router'
 
 import { Application, Mission, prisma } from '@/prisma'
 
-// import styles from '@/styles/Home.module.css'
-
 interface Props {
   applications: Application[],
   mission: Mission,
@@ -21,23 +19,33 @@ export default function MissionView({ applications, mission }: Props) {
       </Head>
       <main className="container">
         <h1>{mission.title}</h1>
-        <p>
-          <Link href={`/missions/${address}/${id}/apply`}>Apply</Link>
-        </p>
+        {!mission.worker &&
+          <p>
+            <Link href={`/missions/${address}/${id}/apply`}>Apply</Link>
+          </p>
+        }
         <h3>Bounty</h3>
         <p>{mission.bounty} DEAD</p>
         <h3>Description</h3>
         <p>
           {mission.description}
         </p>
-        <h3>Applicants</h3>
-        <ul>
-          {applications.map(application => (
-            <li key={application.id}>
-              <Link href={`/missions/${address}/${mission.id}/applications/${application.id}`}>{application.userId}</Link>
-            </li>
-          ))}
-        </ul>
+        {mission.worker ?
+          <div>
+            <h3>Worker</h3>
+            <p>{mission.worker}</p>
+          </div> :
+          <div>
+            <h3>Applicants</h3>
+            <ul>
+              {applications.map(application => (
+                <li key={application.id}>
+                  <Link href={`/missions/${address}/${mission.id}/application/${application.id}`}>{application.userId}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        }
       </main>
     </>
   )
