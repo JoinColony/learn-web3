@@ -1,0 +1,10 @@
+.mission {
+}
+
+.done {
+    text-decoration: line-through;
+}
+
+.pending {
+    color: red;
+}

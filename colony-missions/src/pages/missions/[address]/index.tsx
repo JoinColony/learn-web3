@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 
 import { prisma, Mission } from '@/prisma'
+
+import MissionListItem from '@/components/MissionListItem'
 
 interface Props {
   missions: Mission[],
@@ -21,10 +22,9 @@ export default function ColonyMissions({ missions }: Props) {
         <ul>
           {missions.map(mission => (
             <li key={mission.id}>
-              <Link href={`/missions/${address}/${mission.id}`}>{mission.title}</Link>
+              <MissionListItem mission={mission} />
             </li>
           ))}
-          <li style={{ textDecoration: 'line-through' }}><Link href={`/missions/${address}/54`}>Solve issue #54 in our SDK</Link></li>
         </ul>
       </main>
     </>
@@ -35,7 +35,11 @@ export const getServerSideProps = async ({ params }) => {
   const missions = await prisma.mission.findMany({
     where: {
       colony: params.address
-    }
+    },
+    orderBy: [
+      { done: 'desc' },
+      { worker: 'asc' }
+    ]
   });
 
   return { props: { missions }}
