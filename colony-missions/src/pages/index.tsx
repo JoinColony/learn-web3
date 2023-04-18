@@ -6,7 +6,6 @@ import { ironOptions } from '@/config'
 interface Props {
   user: {
     address: string,
-    isAdmin: boolean,
   },
 }
 
@@ -22,8 +21,7 @@ export default function Home({ user }: Props) {
       <main className="container">
         <h1>Colony Missions</h1>
         {user.address ?
-          <p>User with address {user.address} is logged in.
-          {user.isAdmin ? <span>They are an admin</span> : <span>They are no admin</span>}</p>
+          <p>User with address {user.address} is logged in.</p>
         :
           <p>Not logged in</p>
         }
@@ -37,7 +35,6 @@ export const getServerSideProps = withIronSessionSsr(async ({ req }) => {
     props: {
       user: {
         address: req.session.siwe?.address || null,
-        isAdmin: req.session.user?.isAdmin || null,
       }
     }
   }

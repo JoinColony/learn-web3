@@ -9,7 +9,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'GET':
       res.send({
         address: req.session.siwe?.address,
-        isAdmin: req.session.user?.isAdmin,
       })
       break
     default:

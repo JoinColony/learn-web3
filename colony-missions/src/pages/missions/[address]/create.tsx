@@ -4,14 +4,9 @@ import { withIronSessionSsr } from 'iron-session/next'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
 import { ironOptions } from '@/config'
-
-// import styles from '@/styles/Home.module.css'
+import { isUserAdmin } from '@/colony'
 
 interface Props {
-  // user: {
-  //   address: string,
-  //   isAdmin: boolean,
-  // },
 }
 
 interface Inputs {
@@ -66,8 +61,12 @@ export default function CreateMission({ }: Props) {
   )
 }
 
-export const getServerSideProps = withIronSessionSsr(async ({ req }) => {
-  if (!req.session.user?.isAdmin) {
+export const getServerSideProps = withIronSessionSsr(async ({ params, req }) => {
+  const isAdmin = req.session.siwe &&
+                  req.session.siwe.address &&
+                  params && params.address &&
+                  await isUserAdmin(params.address as string, req.session.siwe?.address)
+  if (!isAdmin) {
     return {
       notFound: true,
     }

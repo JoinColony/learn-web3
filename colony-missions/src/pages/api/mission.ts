@@ -5,9 +5,6 @@ import { ironOptions } from '@/config'
 import { isUserAdmin } from '@/colony'
 import { prisma, Mission } from '@/prisma';
 
-// FIXME: Definitely do not hard code this, otherwise it'll only work with one Colony
-const COLONY_DEV_ADDRESS = '0x364B3153A24bb9ECa28B8c7aCeB15E3942eb4fc5'
-
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req
   switch (method) {
