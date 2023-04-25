@@ -1,8 +1,12 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useContext } from 'react'
+import { toWei } from '@colony/sdk'
 
 import { Application, Mission, prisma } from '@/prisma'
+
+import { ColonyContext } from '../../../_app'
 
 interface Props {
   applications: Application[],
@@ -11,7 +15,26 @@ interface Props {
 
 export default function MissionView({ applications, mission }: Props) {
   const router = useRouter()
+  const { colonyNetwork } = useContext(ColonyContext)
   const { address, id } = router.query
+
+  const pay = async () => {
+    if (!colonyNetwork) {
+      return;
+    }
+    const colony = await colonyNetwork.getColony(address as string)
+    if (!colony.ext.oneTx) {
+      return alert('OneTxPayment extension not available!')
+    }
+    if (!mission.worker) {
+      return alert('No worker for mission');
+    }
+    const [{ nPayouts }] = await colony.ext.oneTx.pay(
+      mission.worker,
+      toWei(mission.bounty)
+    ).tx()
+  }
+
   return (
     <>
       <Head>
@@ -34,6 +57,7 @@ export default function MissionView({ applications, mission }: Props) {
           <div>
             <h3>Worker</h3>
             <p>{mission.worker}</p>
+            {colonyNetwork && <button onClick={pay}>Pay worker and complete mission</button>}
           </div> :
           <div>
             <h3>Applicants</h3>
