@@ -54,7 +54,13 @@ Lesson 8 (March 28, 21:00 CEST): Creating forms and prettifying everything
 
 Lesson 9 (April 4, 21:00 CEST): Adding a database using Prisma
 
-Lesson 10 (April 18, 21:00 CEST): Continuation on database models and CRUD operations
+Lesson 10 (April 18, 21:00 CEST): Databases and Blockchain permissions
+
+Lesson 11 (April 25, 21:00 CEST): Integrating with Colony SDK
+
+Lesson 12 (May 2, 21:00 CEST): Writing a simple block ingestor
+
+Lesson 13 (May 9, 21:00 CEST): Wrapping it all up
 
 ## Join the fun!
 
