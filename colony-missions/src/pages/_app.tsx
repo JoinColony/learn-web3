@@ -22,7 +22,7 @@ watchSigner({}, async (signer) => {
   if (!signer) {
     return;
   }
-  colonyContextObj.colonyNetwork = await ColonyNetwork.init(signer)
+  colonyContextObj.colonyNetwork = new ColonyNetwork(signer)
 })
 
 export default function App({ Component, pageProps }: AppProps) {

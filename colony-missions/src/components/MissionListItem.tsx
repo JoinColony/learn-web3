@@ -13,8 +13,9 @@ export default function MissionListItem ({ mission }: Props) {
   return (
     <Link
       className={clsx(styles.mission, {
-        [styles.done]: mission.done,
-        [styles.pending]: !mission.done && mission.worker
+        [styles.paid]: mission.paid,
+        [styles.done]: mission.txHash,
+        [styles.pending]: !mission.txHash && mission.worker
       })}
       href={`/missions/${mission.colony}/${mission.id}`}
     >

@@ -8,3 +8,7 @@
 .pending {
     color: red;
 }
+
+.paid {
+    color: green;
+}

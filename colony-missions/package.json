@@ -9,7 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@colony/sdk": "^1.6.0",
+    "@colony/events": "^0.2.0",
+    "@colony/sdk": "^2.0.0-quickfix.0",
     "@prisma/client": "^4.12.0",
     "@types/node": "18.15.3",
     "@types/react": "18.0.28",
@@ -23,12 +24,13 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.8",
-    "siwe": "^1.1.6",
+    "siwe": "^2.1.4",
     "typescript": "5.0.2",
     "wagmi": "^0.12.1"
   },
   "devDependencies": {
     "@picocss/pico": "^1.5.7",
-    "prisma": "^4.12.0"
+    "prisma": "^4.12.0",
+    "ts-node": "^10.9.1"
   }
 }

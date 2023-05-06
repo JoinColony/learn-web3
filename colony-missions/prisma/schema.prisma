@@ -24,7 +24,8 @@ model Mission {
     description  String
     applications Application[]
     worker       String?
-    done         Boolean
+    txHash       String?
+    paid         Boolean       @default(false)
 }
 
 model Application {

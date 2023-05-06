@@ -29,10 +29,21 @@ export default function MissionView({ applications, mission }: Props) {
     if (!mission.worker) {
       return alert('No worker for mission');
     }
-    const [{ nPayouts }] = await colony.ext.oneTx.pay(
+    const [, { transactionHash }] = await colony.ext.oneTx.pay(
       mission.worker,
       toWei(mission.bounty)
     ).tx()
+
+    await fetch(`/api/mission/${mission.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        address: mission.colony,
+        data: { txHash: transactionHash }
+      })
+    })
   }
 
   return (
@@ -47,6 +58,12 @@ export default function MissionView({ applications, mission }: Props) {
             <Link href={`/missions/${address}/${id}/apply`}>Apply</Link>
           </p>
         }
+        {!mission.paid && mission.txHash &&
+          <p><b>Payment for this mission is still pendig</b></p>
+        }
+        {mission.paid &&
+          <p><b>This mission was paid out</b></p>
+        }
         <h3>Bounty</h3>
         <p>{mission.bounty} DEAD</p>
         <h3>Description</h3>
@@ -57,7 +74,7 @@ export default function MissionView({ applications, mission }: Props) {
           <div>
             <h3>Worker</h3>
             <p>{mission.worker}</p>
-            {colonyNetwork && <button onClick={pay}>Pay worker and complete mission</button>}
+            {colonyNetwork && !mission.txHash && <button onClick={pay}>Pay worker and complete mission</button>}
           </div> :
           <div>
             <h3>Applicants</h3>
