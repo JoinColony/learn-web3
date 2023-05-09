@@ -14,12 +14,21 @@ model User {
     id           Int           @id @default(autoincrement())
     address      String        @unique
     applications Application[]
+    adminIn      Colony[]
+}
+
+model Colony {
+    id       Int       @id @default(autoincrement())
+    address  String    @unique
+    missions Mission[]
+    admins   User[]
 }
 
 model Mission {
     id           Int           @id @default(autoincrement())
-    colony       String
     title        String
+    colony       Colony        @relation(fields: [colonyId], references: [id])
+    colonyId     Int
     bounty       String
     description  String
     applications Application[]
