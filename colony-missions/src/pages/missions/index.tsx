@@ -1,15 +1,16 @@
 import Head from 'next/head'
+
+import { prisma, MissionWithColony, Colony } from '@/prisma'
+import MissionListItem from '@/components/MissionListItem'
 import Link from 'next/link'
 
-import { prisma, Mission } from '@/prisma'
-
-// import styles from '@/styles/Home.module.css'
 
 interface Props {
-  missions: Mission[],
+  colonies: Colony[],
+  missions: MissionWithColony[],
 }
 
-export default function Missions({ missions }: Props) {
+export default function Missions({ colonies, missions }: Props) {
   return (
     <>
       <Head>
@@ -20,7 +21,15 @@ export default function Missions({ missions }: Props) {
         <ul>
           {missions.map(mission => (
             <li key={mission.id}>
-              <Link href={`/missions/${mission.colony}/${mission.id}`}>{mission.title}</Link>
+              <MissionListItem mission={mission} />
+            </li>
+          ))}
+        </ul>
+        <h1>Colonies with open missions</h1>
+        <ul>
+          {colonies.map(colony => (
+            <li key={colony.id}>
+              <Link href={`/missions/${colony.address}`}>{colony.address}</Link>
             </li>
           ))}
         </ul>
@@ -30,7 +39,20 @@ export default function Missions({ missions }: Props) {
 }
 
 export const getServerSideProps = async () => {
-  const missions = await prisma.mission.findMany();
+  const missions = await prisma.mission.findMany({
+    include: {
+      colony: true,
+    }
+  })
+  const colonies = await prisma.colony.findMany({
+    where: {
+      missions: {
+        some: {
+          paid: false,
+        }
+      }
+    }
+  })
 
-  return { props: { missions }}
+  return { props: { missions, colonies }}
 }

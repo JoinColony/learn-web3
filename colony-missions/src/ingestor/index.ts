@@ -22,7 +22,10 @@ setInterval(async () => {
   let foundEvent = null;
   receipt.logs.forEach((log) => {
     try {
-      foundEvent = oneTxEventSource.interface.parseLog(log)
+      const event = oneTxEventSource.interface.parseLog(log)
+      if (event.name === 'OneTxPaymentMade') {
+        foundEvent = event
+      }
     } catch (e) {
       // nothing
     }

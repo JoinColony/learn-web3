@@ -5,8 +5,6 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { ironOptions } from '@/config'
 import { Mission, prisma } from '@/prisma'
 
-// import styles from '@/styles/Home.module.css'
-
 interface Props {
   mission: Mission,
 }
@@ -51,7 +49,7 @@ export default function MissionApply({ mission }: Props) {
 }
 
 export const getServerSideProps = withIronSessionSsr(async ({ params, req }) => {
-  if (!req.session.user || typeof params?.id != 'string') {
+  if (!req.session.siwe?.address || typeof params?.id != 'string') {
     return {
       notFound: true,
     }
@@ -61,6 +59,10 @@ export const getServerSideProps = withIronSessionSsr(async ({ params, req }) => 
       id: parseInt(params.id, 10),
     }
   })
+  if (!mission) {
+    return { notFound: true }
+  }
+
   return {
     props: { mission }
   }

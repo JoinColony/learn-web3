@@ -24,8 +24,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         if (!userIsAdmin) {
           throw new Error('User is not admin');
         }
-        const mission = await prisma.mission.findUnique({ where: { id: parseInt(missionId as string, 10) }})
-        if (!mission || mission.colony !== address) {
+        const mission = await prisma.mission.findUnique({
+          include: {
+            colony: true,
+          },
+          where: { id: parseInt(missionId as string, 10)
+        }})
+        if (!mission || mission.colony.address !== address) {
           throw new Error('Mission does not belong to Colony')
         }
 

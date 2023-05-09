@@ -1,30 +1,26 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import { withIronSessionSsr } from 'iron-session/next'
-import { useRouter } from 'next/router'
 
-import { Application, Mission, User, prisma } from '@/prisma'
+import { Application, MissionWithColony, User, prisma } from '@/prisma'
 import { isUserAdmin } from '@/colony'
 import { ironOptions } from '@/config'
 
 interface Props {
   application: Application,
   isAdmin: boolean,
-  mission: Mission,
+  mission: MissionWithColony,
   user: User,
 }
 
 export default function ApplicationView({ application, isAdmin, mission, user }: Props) {
-  const router = useRouter()
-  const { address, id } = router.query
 
   const acceptApplication = async () => {
-    const response = await fetch(`/api/mission/${mission.id}`, {
+    await fetch(`/api/mission/${mission.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ address: mission.colony, data: { worker: user.address } })
+      body: JSON.stringify({ address: mission.colony.address, data: { worker: user.address } })
     })
   }
 
@@ -54,6 +50,9 @@ export const getServerSideProps = withIronSessionSsr(async ({ params, req }) => 
     }
   })
   const mission = await prisma.mission.findUnique({
+    include: {
+      colony: true,
+    },
     where: {
       id: parseInt(params.id, 10),
     }

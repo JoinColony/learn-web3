@@ -1,21 +1,9 @@
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { SiweMessage } from 'siwe'
-import { Id } from '@colony/sdk'
-import { BigNumber } from 'ethers'
 
 import { ironOptions } from '@/config'
-import { getClient } from '@/colony'
 import { prisma } from '@/prisma'
-
-const isUserAdmmin = async (colonyAddress: string, userAddress: string) => {
-  const client = await getClient()
-  const colony = await client.getColony(colonyAddress)
-  const colonyClient = colony.getInternalColonyClient()
-  const roles = await colonyClient.getUserRoles(userAddress, Id.RootDomain)
-  const rolesBn = BigNumber.from(roles)
-  return rolesBn.eq(0x6f)
-}
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req

@@ -1,12 +1,12 @@
 import Link from 'next/link'
 import clsx from 'clsx'
 
-import { Mission } from '@prisma/client'
+import { MissionWithColony } from '@/prisma'
 
 import styles from '@/styles/MissionListItem.module.css'
 
 interface Props {
-  mission: Mission,
+  mission: MissionWithColony,
 }
 
 export default function MissionListItem ({ mission }: Props) {
@@ -17,7 +17,7 @@ export default function MissionListItem ({ mission }: Props) {
         [styles.done]: mission.txHash,
         [styles.pending]: !mission.txHash && mission.worker
       })}
-      href={`/missions/${mission.colony}/${mission.id}`}
+      href={`/missions/${mission.colony.address}/${mission.id}`}
     >
       {mission.title}
     </Link>

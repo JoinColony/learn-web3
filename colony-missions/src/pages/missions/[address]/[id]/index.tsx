@@ -3,17 +3,21 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { toWei } from '@colony/sdk'
+import { withIronSessionSsr } from 'iron-session/next'
 
-import { Application, Mission, prisma } from '@/prisma'
+import { Application, MissionWithColony, prisma } from '@/prisma'
 
 import { ColonyContext } from '../../../_app'
+import { ironOptions } from '@/config'
+import { isUserAdmin } from '@/colony'
 
 interface Props {
   applications: Application[],
-  mission: Mission,
+  isAdmin: boolean,
+  mission: MissionWithColony,
 }
 
-export default function MissionView({ applications, mission }: Props) {
+export default function MissionView({ applications, isAdmin, mission }: Props) {
   const router = useRouter()
   const { colonyNetwork } = useContext(ColonyContext)
   const { address, id } = router.query
@@ -40,7 +44,7 @@ export default function MissionView({ applications, mission }: Props) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        address: mission.colony,
+        address: mission.colony.address,
         data: { txHash: transactionHash }
       })
     })
@@ -74,7 +78,7 @@ export default function MissionView({ applications, mission }: Props) {
           <div>
             <h3>Worker</h3>
             <p>{mission.worker}</p>
-            {colonyNetwork && !mission.txHash && <button onClick={pay}>Pay worker and complete mission</button>}
+            {isAdmin && colonyNetwork && !mission.txHash && <button onClick={pay}>Pay worker and complete mission</button>}
           </div> :
           <div>
             <h3>Applicants</h3>
@@ -92,8 +96,15 @@ export default function MissionView({ applications, mission }: Props) {
   )
 }
 
-export const getServerSideProps = async ({ params }) => {
+export const getServerSideProps = withIronSessionSsr(async ({ req, params }) => {
+  const isAdmin = req.session.siwe &&
+                  req.session.siwe.address &&
+                  params && params.address &&
+                  await isUserAdmin(params.address as string, req.session.siwe?.address)
   const mission = await prisma.mission.findUnique({
+    include: {
+      colony: true,
+    },
     where: {
       id: parseInt(params.id, 10),
     }
@@ -104,5 +115,5 @@ export const getServerSideProps = async ({ params }) => {
     }
   })
 
-  return { props: { mission, applications }}
-}
+  return { props: { mission, applications, isAdmin }}
+}, ironOptions)

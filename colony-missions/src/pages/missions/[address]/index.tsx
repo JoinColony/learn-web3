@@ -1,15 +1,23 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { withIronSessionSsr } from 'iron-session/next'
+import { utils } from 'ethers'
 
-import { prisma, Mission } from '@/prisma'
+import { prisma, MissionWithColony } from '@/prisma'
 
 import MissionListItem from '@/components/MissionListItem'
+import { ironOptions } from '@/config'
+import { isUserAdmin } from '@/colony'
+import Link from 'next/link'
+
+const { isAddress } = utils
 
 interface Props {
-  missions: Mission[],
+  isAdmin: boolean,
+  missions: MissionWithColony[],
 }
 
-export default function ColonyMissions({ missions }: Props) {
+export default function ColonyMissions({ missions, isAdmin }: Props) {
   const router = useRouter()
   const { address } = router.query
   return (
@@ -26,21 +34,40 @@ export default function ColonyMissions({ missions }: Props) {
             </li>
           ))}
         </ul>
+        {isAdmin && <Link href={`/missions/${address}/create`} role="button">Create mission</Link>}
       </main>
     </>
   )
 }
 
-export const getServerSideProps = async ({ params }) => {
-  const missions = await prisma.mission.findMany({
+export const getServerSideProps = withIronSessionSsr(async ({ params, req }) => {
+  if (!isAddress(params?.address as string)) {
+    return { notFound: true }
+  }
+
+  const isAdmin = req.session.siwe &&
+                  req.session.siwe.address &&
+                  params && params.address &&
+                  await isUserAdmin(params.address as string, req.session.siwe?.address)
+  const colony = await prisma.colony.findUnique({
     where: {
-      colony: params.address
+      address: params?.address as string,
+    }
+  })
+
+  const missions = await prisma.mission.findMany({
+    include: {
+      colony: true,
+    },
+    where: {
+      colonyId: colony?.id,
     },
     orderBy: [
-      { done: 'desc' },
+      { paid: 'desc' },
       { worker: 'asc' }
     ]
-  });
+  })
 
-  return { props: { missions }}
-}
+  return { props: { colony, missions, isAdmin }}
+}, ironOptions)
+
